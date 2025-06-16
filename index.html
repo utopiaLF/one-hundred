@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+    <title>The One Hundred</title>
+</head>
+<body>
+    <div id="app" class="app">
+        <h2>Guess the number between 1 and 100</h2>
+
+        <input v-model="number" @keyup.enter="guessTheNumber" type="number" placeholder="Your number...">
+        <button @click="guessTheNumber" class="guessBtn" :class="{ active: number}" :disabled="!number">Guess</button>
+        <br>
+        <p>{{ alertMessage }}</p>
+
+        <div class="wonDiv" :class="{ active: won}">
+            <img src="https://i.gifer.com/Xtef.gif" width="90" alt="">
+            <h1>Correct! You guessed in {{ guessCount }} tries</h1>
+            <button @click="refreshPage">Play Again</button>
+        </div>
+    </div>
+
+    <script>
+        const { createApp } = Vue;
+
+        createApp({
+            data() {
+                return {
+                    number: null,
+                    guessCount: 0,
+                    alertMessage: '',
+                    won: false
+                }
+            },
+            methods: {
+                guessTheNumber() {
+                    this.guessCount++;
+                    const randomNumberIs = sessionStorage.getItem('randomNumberIs') || 0;
+
+                    if(this.number < randomNumberIs) {
+                        this.alertMessage = 'Too low. Try a higher number.'
+                    } else if(this.number > randomNumberIs) {
+                        this.alertMessage = 'Too high. Try a lower number.'
+                    } else if(this.number == randomNumberIs) {
+                        this.alertMessage = 'Congratulations! You guessed it!';
+                        this.won = true;
+                        launchConfetti();
+                    } else {
+                        this.alertMessage = 'Pls enter a number between 1 and 100.'
+                    }
+                },
+                refreshPage() {
+                    window.location.reload();
+                }
+            },
+            mounted() {
+                const randomNumber = Math.floor(Math.random() * 100) + 1;
+                sessionStorage.setItem('randomNumberIs', randomNumber);
+            }
+        }).mount('#app');
+
+        function launchConfetti() {
+                confetti({
+                particleCount: 150,
+                spread: 70,
+                origin: { y: 0.6 }
+            });
+        }
+    </script>
+</body>
+</html>
