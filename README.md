@@ -1,5 +1,21 @@
-# Vue 3 + Vite
+# One-Hundred
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+A small and fun number guessing game built with Vue.  
+Try to guess the secret number between 1 and 100 — the game gives you hints along the way!  
+Simple, responsive, and made just for fun
 
-Learn more about IDE Support for Vue in the [Vue Docs Scaling up Guide](https://vuejs.org/guide/scaling-up/tooling.html#ide-support).
+## Tech
+ - Vue 3 + Vite
+ - Clean and friendly UI
+ - Responsive design (mobile-friendly)
+
+## Play now
+[https://utopialf.github.io/one-hundred/](https://utopialf.github.io/one-hundred/)
+
+## About
+This mini game is a small experiment with Vue — focused on interaction, feedback, and good vibes.  
+A great way to take a short break and test your intuition!
+
+<br>
+
+Made with ❤️ by @utopiaLF
